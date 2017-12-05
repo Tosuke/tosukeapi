@@ -1,0 +1,58 @@
+{
+  "name": "tosukeapi",
+  "version": "1.0.0",
+  "description":
+    "services provided as web apis by firebase functions over google cloud functions",
+  "main": "dist/index.js",
+  "scripts": {
+    "deploy": "run-s build deploy:firebase",
+    "deploy:firebase": "firebase deploy --only functions,hosting",
+    "serve": "run-s build serve:firebase",
+    "serve:firebase": "firebase serve --only functions,hosting",
+    "logs": "firebase functions:log",
+    "build": "run-p build:*",
+    "build:js": "babel src --out-dir dist",
+    "build:cp": "cpx 'package*.json' dist",
+    "fmt": "run-p fmt:*",
+    "fmt:js": "prettier-standard 'src/**/*.js'",
+    "fmt:json": "prettier --parser=json --write '*.json' 'src/**/*.json'",
+    "clean": "del 'dist/*'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["prettier-standard", "git add"],
+    "*.json": ["prettier --parser=json --write", "git add"],
+    ".*rc": ["prettier --parser=json --write"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Tosuke/tosukeapi.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tosuke/tosukeapi/issues"
+  },
+  "homepage": "https://github.com/Tosuke/tosukeapi#readme",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "cheerio-httpcli": "^0.7.2",
+    "firebase-admin": "^5.5.1",
+    "firebase-functions": "^0.7.3",
+    "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "koa-router": "^7.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "cpx": "^1.5.0",
+    "del-cli": "^1.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.8.2",
+    "prettier-standard": "^7.0.3"
+  }
+}

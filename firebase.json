@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "source": "."
+  },
+  "hosting": {
+    "public": "public",
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "https://github.com/Tosuke/tosukeapi",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "index"
+      }
+    ]
+  }
+}
